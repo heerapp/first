@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<form method="post" action="{%url 'edit' employee.id %}">
+  {% csrf_token %}
+    <div class="form-group">
+        <div class="jumbotron">
+        <label>Name</label>
+        <input name="name" type="text" class="form-control" id="name" value="{{employee.name}}">
+        <br>
+        <label>Contact</label>
+        <input name="contact" type="text" class="form-control" id="contact" value="{{employee.contact}}">
+        <br>
+        <label>Address</label>
+        <input name="address" type="text" class="form-control" id="address" value="{{employee.address}}">
+    </div>
+    <button type="submit" class="btn btn-success">Update user</button>
+    </div>
+</form>
+
+
+{% endblock %}

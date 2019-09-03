@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for employee in employee %}
+<br>
+ <div class="card text-black mb-3" style="width: 18rem;">
+    <div class="card-body">
+    <h5 class="card-title">{{employee.id}}.<a href="/employee/{{employee.id}}">{{employee.name}}</a> </h5>
+    <p class="card-text">Adress:{{employee.address}}</p>
+    <p class="card-text">Contact:{{employee.contact}}</p>
+    </div>
+    <div class="card-footer">
+       <a type="button"  class="btn btn-info btn-sm" href="edit/{{employee.id}}">Edit</a> <a type="button" class="btn btn-danger btn-sm" href="delete/{{employee.id}}">Delete</a>
+    </div>
+    </div>
+{% endfor %}
+{% endblock %}

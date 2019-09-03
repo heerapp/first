@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<br>
+<form method="post" action="{% url 'create' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-group">
+        <div class="jumbotron">
+        <label>Name</label>
+        <input name="name" type="text" class="form-control" id="name" placeholder="Name">
+        <br>
+         <label>Contact</label>
+        <input name="contact" type="text" class="form-control" id="contact" placeholder="Contact">
+        <br>
+        <label>Address</label>
+        <input name="address" type="text" class="form-control" id="address" placeholder="Address">
+            <br>
+        <label>Password</label>
+        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
+            <br>
+            <label class="required">Image:</label>
+            <input type="file" name="image" id="image">
+        </div>
+
+    <div class="footer">
+        <button type="submit" class="btn btn-success">Create</button>
+    </div>
+        </div>
+</form>
+
+{% endblock %}
