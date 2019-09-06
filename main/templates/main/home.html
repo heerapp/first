@@ -2,7 +2,8 @@
 
 {% block content %}
 <br>
-<a type="button" class="btn" href="create">Create</a>
+<a type="button" class="btn" href="/create">Create</a>
+<a type="button" class="btn" href="/employee">Employees</a>
 <br>
 <br>
 <h1 align="center">Attendance Table</h1>
@@ -11,22 +12,21 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Date</th>
             <th>start-time</th>
             <th>end-time</th>
         </tr>
     </thead>
 
     <tbody class="table-ko-body table-primary" id="myTable">
-        {% for employee in employee %}
+        {% for attendance in attendance %}
         <tr>
-        <td>{{ employee.id }}</td>
-        <td>{{ employee.name }}</td>
-        <td>{{ attendance.date }}</td>
-        <td>{{ attendance.start }}</td>
-        <td>{{ attendance.end }}</td>
+        <td>{{ attendance.employee.id }}</td>
+        <td>{{ attendance.employee.name }}</td>
+        <td>{{ attendance.start_time }}</td>
+        <td>{{ attendance.end_time }}</td>
         </tr>
          {% endfor %}
+
     </tbody>
 
 </table>
@@ -37,7 +37,6 @@
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>Days</th>
             <th>Date</th>
             <th>Reason</th>
             <th>Permission</th>
@@ -45,11 +44,10 @@
     </thead>
 
     <tbody class="table-ko-body table-primary" id="myTables">
-        {% for employee in employee %}
+        {% for leave in leave %}
         <tr>
-        <td>{{ employee.id }}</td>
-        <td>{{ employee.name }}</td>
-        <td>{{ leave.days }}</td>
+        <td>{{ leave.employee.id }}</td>
+        <td>{{ leave.employee.name }}</td>
         <td>{{ leave.date }}</td>
         <td>{{ leave.reason }}</td>
         <td><button class="btn btn-success">grant leave</button> <button class="btn btn-danger">reject leave</button> </td>

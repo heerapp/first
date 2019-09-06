@@ -5,8 +5,9 @@
 {% for employee in employee %}
 <br>
  <div class="card text-black mb-3" style="width: 18rem;">
+    <img src="{{employee.image.url}}" class="card-img-top">
     <div class="card-body">
-    <h5 class="card-title">{{employee.id}}.<a href="/employee/{{employee.id}}">{{employee.name}}</a> </h5>
+    <h5 class="card-title">{{employee.id}}.{{employee.name}}</h5>
     <p class="card-text">Adress:{{employee.address}}</p>
     <p class="card-text">Contact:{{employee.contact}}</p>
     </div>

@@ -1,5 +1,4 @@
 from django.db import models
-from datetime import datetime
 
 class Employee(models.Model):
     name = models.CharField(max_length=50,unique=True)
@@ -11,20 +10,11 @@ class Employee(models.Model):
     def __str__(self):
         return self.name
 
-class Attendance(models.Model):
-    employee = models.ForeignKey('Employee',on_delete=models.CASCADE)
-    date = models.DateField(default=datetime.now)
-    start_time = models.TimeField()
-    end_time = models.TimeField()
 
-    def __str__(self):
-        return self.employee
+class Attendance(models.Model):
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
 
 class Leave(models.Model):
-    employee = models.ForeignKey('Employee',on_delete=models.CASCADE)
-    days = models.IntegerField(default=1)
     date = models.DateField()
     reason = models.TextField()
-
-    def __str__(self):
-        return self.employee
