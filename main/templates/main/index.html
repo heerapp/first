@@ -1,11 +1,27 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% for message in messages %}
+
+<style>
+.messages{
+background-color:green;
+}
+</style>
+
+<div class="messages">
+  <div class="alert {{ message.tags }} alert-dismissible h3" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    {{ message }}
+  </div>
+    </div>
+{% endfor %}
 
 <div align="center">
 <h1>Welcome To Employee Management System</h1>
-<p>Login to continue</p>
-<a class="btn btn-primary" type="button" href="/login">Login</a>
 </div>
+
 
 {% endblock %}

@@ -1,21 +1,21 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import *
 from django.contrib.auth.models import User
 from django.contrib import auth,messages
 from django.contrib.auth.decorators import permission_required
-from .forms import EmployeeForm, StartAttendanceForm, LeaveForm
+from .forms import *
+
 
 def index(request):
     return render(request,'main/index.html')
 
+
 @permission_required('is_superuser',raise_exception=True)
 def home(request):
     employee = Employee.objects.all()
-    attendance = Attendance.objects.all()
     leave = Leave.objects.all()
+
     context = {
         'employee': employee,
-        'attendance': attendance,
         'leave': leave
     }
     return render(request, 'main/home.html', context)
@@ -30,7 +30,7 @@ def create(request):
             user = User.objects.create_user(request.POST['name'], password=request.POST['password'])
             form.save()
             auth.login(request, user)
-            return redirect('/employee')
+            return redirect('/')
 
     return render(request, 'main/create.html')
 
@@ -57,6 +57,7 @@ def edit(request, pk):
 
     return render(request, 'main/edit.html', {'employee': employee})
 
+
 @permission_required('is_superuser',raise_exception=True)
 def employee(request):
     employee = Employee.objects.all()
@@ -65,19 +66,50 @@ def employee(request):
 
 def employ(request, pk):
     employee = Employee.objects.all().filter(pk=pk)
-    form = StartAttendanceForm(request.POST or None)
-    if form.is_valid():
-        form.save()
-        return redirect('/home')
     return render(request, 'main/employ.html', {'employee': employee})
 
 
 def leave(request):
     form = LeaveForm(request.POST or None)
-    pk = str(request.user.pk - 1)
 
     if form.is_valid():
-        form.save()
+        leave = form.save(commit=False)
+        leave.user = request.user
+        leave.save()
         messages.success(request,'your leave request has been sent.')
-        return redirect('/employee/'+pk)
+        return redirect('/')
     return render(request, 'main/leave.html')
+
+
+def entry(request):
+    form = EntryForm(request.POST or None)
+
+    if form.is_valid():
+        entry = form.save(commit=False)
+        entry.user = request.user
+        entry.save()
+        messages.success(request,'your attendance has been saved.')
+        return redirect('/')
+    return render(request, 'main/entry.html')
+
+
+def exit(request):
+    form = ExitForm(request.POST or None)
+
+    if form.is_valid():
+        exit = form.save(commit=False)
+        exit.user = request.user
+        exit.save()
+        messages.success(request,'your attendance has been saved.')
+        return redirect('/')
+    return render(request, 'main/exit.html')
+
+
+def attendance(request,id):
+    entry = Entry.objects.all().filter(id=id)
+    exit = Exit.objects.all().filter(id=id)
+    context={
+        'entry': entry,
+         'exit': exit
+    }
+    return render(request,"main/details.html",context)

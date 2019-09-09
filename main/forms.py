@@ -1,5 +1,5 @@
 from django import forms
-from .models import Employee,Attendance,Leave
+from .models import *
 
 
 class EmployeeForm(forms.ModelForm):
@@ -7,12 +7,24 @@ class EmployeeForm(forms.ModelForm):
         model = Employee
         fields = "__all__"
 
-class StartAttendanceForm(forms.ModelForm):
+
+class EntryForm(forms.ModelForm):
     class Meta:
-        model = Attendance
-        fields = ["start_time"]
+        model = Entry
+        exclude = ('user',)
+
+
+class ExitForm(forms.ModelForm):
+    class Meta:
+        model = Exit
+        exclude = ('user',)
+
 
 class LeaveForm(forms.ModelForm):
     class Meta:
         model = Leave
-        fields = ["date","reason"]
+        exclude = ('user',)
+
+
+
+

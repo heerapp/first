@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="card" align="center">
+<form method="post">
+{% csrf_token %}
+<br>
+<h1>Entry Form</h1>
+    name : <input type="text" >
+<h3 class="text-uppercase">name:{{user}}</h3><hr>
+    <button class="btn btn-success" type="submit">Present</button>
+</form>
+</div>
+{% endblock %}

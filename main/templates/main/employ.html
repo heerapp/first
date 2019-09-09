@@ -3,23 +3,12 @@
 {% block content %}
 
 {% for employee in employee.all %}
-{% for message in messages %}
-<div class="messages">
-  <div class="alert {{ message.tags }} alert-dismissible h3" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    {{ message }}
-  </div>
-    </div>
-{% endfor %}
+
 <style>
     body{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
 }
-.messages{
-background-color:green;
-}
+
 .emp-profile{
     padding: 3%;
     margin-top: 3%;
@@ -134,10 +123,13 @@ background-color:green;
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Attendance</a>
+                                    <a class="nav-link" href="/entry/" aria-selected="false">Entry</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/leave" aria-selected="false">Leave</a>
+                                    <a class="nav-link" href="/exit/" aria-selected="false">Exit</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/leave/" aria-selected="false">Leave</a>
                                 </li>
                             </ul>
                         </div>
@@ -197,36 +189,9 @@ background-color:green;
                                             </div>
                                         </div>
                             </div>
-                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                <form method="POST">
-                                    {% csrf_token %}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>start-time</label>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" onclick="document.getElementById('start').innerHTML = Date()" class="profile-edit-btn" name="btnAdd">start</button>
-                                                <p id="start"></p>
-                                            </div>
-                                        </div>
-                                </form>
-                                <form method="POST">
-                                    {% csrf_token %}
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label>end-time</label>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <button type="button" onclick="document.getElementById('end').innerHTML = Date()" class="profile-edit-btn" name="btnAdd">end</button>
-                                                <p id="end"></p>
-                                            </div>
-                                        </div>
-                                </form>
                             </div>
                         </div>
                     </div>
                 </div>
-        </div>
-
 {% endfor %}
 {% endblock %}

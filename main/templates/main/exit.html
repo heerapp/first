@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<div class="card" align="center">
+<form method="post">
+{% csrf_token %}
+<br>
+<h1>Exit Form</h1>
+<h3 class="text-uppercase">name:{{user}}</h3><hr>
+    <button class="btn btn-danger" type="submit">Exit</button>
+</form>
+</div>
+{% endblock %}
