@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<form method="post" action="{%url 'grant' leave.id %}">
+    {% csrf_token %}
+    <h3>Are you sure you want to grant the leave to "{{leave.user}}" for {{leave.date}} ?</h3>
+        <button type="submit" class="btn btn-danger">Yes,grant</button>
+</form>
+
+{% endblock %}

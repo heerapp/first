@@ -13,5 +13,8 @@ urlpatterns = [
     path('leave/', views.leave, name='leave'),
     path('entry/', views.entry, name='entry'),
     path('exit/', views.exit, name='exit'),
-    path('details/<int:id>/', views.attendance, name='attendance'),
-]
+    path('details/<slug:user>/', views.entry_attendance, name='attendance'),
+    path('detail/<slug:user>/', views.exit_attendance, name='attendances'),
+    path('grant/<int:pk>/', views.grant, name='grant'),
+    path('reject/<int:pk>/', views.reject, name='reject'),
+    ]

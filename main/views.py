@@ -1,27 +1,31 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.models import User
-from django.contrib import auth,messages
+from django.contrib import auth, messages
 from django.contrib.auth.decorators import permission_required
 from .forms import *
 
 
 def index(request):
-    return render(request,'main/index.html')
+    employee = Employee.objects.all()
+    return render(request, 'main/index.html', {'employee': employee})
 
 
-@permission_required('is_superuser',raise_exception=True)
+@permission_required('is_superuser', raise_exception=True)
 def home(request):
     employee = Employee.objects.all()
     leave = Leave.objects.all()
+    entry = Entry.objects.all()
+    exit = Exit.objects.all()
 
     context = {
         'employee': employee,
-        'leave': leave
+        'leave': leave,
+        'entry': entry,
+        'exit': exit,
     }
     return render(request, 'main/home.html', context)
 
 
-@permission_required('is_superuser',login_url='login')
+@permission_required('is_superuser', login_url='login')
 def create(request):
     form = EmployeeForm(request.POST or None, request.FILES)
 
@@ -35,7 +39,7 @@ def create(request):
     return render(request, 'main/create.html')
 
 
-@permission_required('is_superuser',raise_exception=True)
+@permission_required('is_superuser', raise_exception=True)
 def delete(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
 
@@ -47,7 +51,7 @@ def delete(request, pk):
     return render(request, 'main/delete.html', context)
 
 
-@permission_required('is_superuser',raise_exception=True)
+@permission_required('is_superuser', raise_exception=True)
 def edit(request, pk):
     employee = get_object_or_404(Employee, pk=pk)
     form = EmployeeForm(request.POST or None, instance=employee)
@@ -58,7 +62,7 @@ def edit(request, pk):
     return render(request, 'main/edit.html', {'employee': employee})
 
 
-@permission_required('is_superuser',raise_exception=True)
+@permission_required('is_superuser', raise_exception=True)
 def employee(request):
     employee = Employee.objects.all()
     return render(request, 'main/employees.html', {'employee': employee})
@@ -76,7 +80,7 @@ def leave(request):
         leave = form.save(commit=False)
         leave.user = request.user
         leave.save()
-        messages.success(request,'your leave request has been sent.')
+        messages.success(request, 'your leave request has been sent.')
         return redirect('/')
     return render(request, 'main/leave.html')
 
@@ -88,7 +92,7 @@ def entry(request):
         entry = form.save(commit=False)
         entry.user = request.user
         entry.save()
-        messages.success(request,'your attendance has been saved.')
+        messages.success(request, 'your attendance has been saved.')
         return redirect('/')
     return render(request, 'main/entry.html')
 
@@ -100,16 +104,47 @@ def exit(request):
         exit = form.save(commit=False)
         exit.user = request.user
         exit.save()
-        messages.success(request,'your attendance has been saved.')
+        messages.success(request, 'your attendance has been saved.')
         return redirect('/')
     return render(request, 'main/exit.html')
 
 
-def attendance(request,id):
-    entry = Entry.objects.all().filter(id=id)
-    exit = Exit.objects.all().filter(id=id)
-    context={
-        'entry': entry,
-         'exit': exit
+def entry_attendance(request, user):
+    user = Entry.objects.filter(user=request.user)
+    context = {
+        'user': user,
     }
-    return render(request,"main/details.html",context)
+    return render(request, "main/details.html", context)
+
+
+def exit_attendance(request, user):
+    user = Exit.objects.filter(user=request.user)
+    context = {
+        'user': user,
+    }
+    return render(request, "main/detail.html", context)
+
+
+def grant(request, pk):
+    leave = get_object_or_404(Leave, pk=pk)
+
+    if request.method == 'POST':
+        leave.status = "Granted"
+        leave.save()
+        messages.success(request, 'leave granted')
+        return redirect('/home')
+
+    return render(request, 'main/grant.html', {'leave': leave})
+
+
+def reject(request, pk):
+    leave = get_object_or_404(Leave, pk=pk)
+
+    if request.method == 'POST':
+        leave.status = "rejected"
+        leave.save()
+        messages.success(request, 'leave rejected')
+        return redirect('/home')
+
+    return render(request, 'main/reject.html', {'leave': leave})
+

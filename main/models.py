@@ -9,7 +9,6 @@ class Employee(models.Model):
     contact = models.CharField(max_length=200)
     password = models.CharField(max_length=32)
     image = models.ImageField(upload_to="media/")
-    datetime = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return self.name
@@ -17,15 +16,18 @@ class Employee(models.Model):
 
 class Entry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    start_time = models.DateTimeField(auto_now_add=True,blank=True)
+    start_time = models.DateTimeField(auto_now_add=True, blank=True)
+
 
 class Exit(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    end_time = models.DateTimeField(auto_now_add=True,blank=True)
+    end_time = models.DateTimeField(auto_now_add=True, blank=True)
 
 
 class Leave(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField()
     reason = models.TextField()
+    status = models.CharField(max_length=50, default="pending...",blank=True)
+
 
