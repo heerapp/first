@@ -11,13 +11,11 @@ def index(request):
 
 @permission_required('is_superuser', raise_exception=True)
 def home(request):
-    employee = Employee.objects.all()
     leave = Leave.objects.all()
-    entry = Entry.objects.all()
-    exit = Exit.objects.all()
+    entry = Entry.objects.all().filter(start_time__date__day=datetime.now().day)
+    exit = Exit.objects.all().filter(end_time__date__day=datetime.now().day)
 
     context = {
-        'employee': employee,
         'leave': leave,
         'entry': entry,
         'exit': exit,
@@ -147,4 +145,7 @@ def reject(request, pk):
         return redirect('/home')
 
     return render(request, 'main/reject.html', {'leave': leave})
+
+
+
 

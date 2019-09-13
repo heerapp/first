@@ -4,8 +4,9 @@
 
 {% for employee in employee %}
 <br>
+{% if forloop.counter0|divisibleby:2 %}<div class="row text-center">{% endif %}
  <div class="card text-black mb-3" style="width: 18rem;">
-    <img src="{{employee.image.url}}" class="card-img-top">
+    <img src="{{employee.image.url}}" class="card-img-top" style="height:200px; width:285px;">
     <div class="card-body">
        <h5 class="card-title">{{employee.id}}.{{employee.name}}</h5>
     <p class="card-text">Adress:{{employee.address}}</p>
@@ -14,6 +15,7 @@
     <div class="card-footer">
        <a type="button"  class="btn btn-info btn-sm" href="edit/{{employee.id}}">Edit</a> <a type="button" class="btn btn-danger btn-sm" href="delete/{{employee.id}}">Delete</a>
     </div>
-    </div>
+ </div>
+{% if forloop.counter|divisibleby:3 or forloop.last%}</div>{% endif %}
 {% endfor %}
 {% endblock %}

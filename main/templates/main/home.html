@@ -61,7 +61,7 @@ background-color:green;
     </thead>
 
     <tbody class="table-ko-body table-primary" id="myTable">
-        {% for entry in entry.all %}
+        {% for entry in entry %}
         <tr>
         <td>{{ entry.user.id }}</td>
         <td>{{ entry.user }}</td>
@@ -82,7 +82,7 @@ background-color:green;
     </thead>
 
     <tbody class="table-ko-body table-primary" id="myTabless">
-        {% for exit in exit.all %}
+        {% for exit in exit %}
         <tr>
         <td>{{ exit.user.id }}</td>
         <td>{{ exit.user }}</td>
