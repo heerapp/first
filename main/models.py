@@ -2,9 +2,17 @@ from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime
 
+STAFF_CHOICES = [
+    ('Web Developer', 'developer'),
+    ('Receptionist', 'receptionist'),
+    ('Manager', 'manager'),
+    ('Designer', 'designer'),
+]
+
 
 class Employee(models.Model):
-    name = models.CharField(max_length=50,unique=True)
+    name = models.CharField(max_length=50, unique=True)
+    type = models.CharField(max_length=100, choices=STAFF_CHOICES)
     address = models.CharField(max_length=200)
     contact = models.CharField(max_length=200)
     password = models.CharField(max_length=32)

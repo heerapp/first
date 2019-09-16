@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404,HttpResponseRedirect,reverse
 from django.contrib import auth, messages
-from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import permission_required,login_required
 from .forms import *
+
 
 
 def index(request):
@@ -14,11 +15,17 @@ def home(request):
     leave = Leave.objects.all()
     entry = Entry.objects.all().filter(start_time__date__day=datetime.now().day)
     exit = Exit.objects.all().filter(end_time__date__day=datetime.now().day)
+    count = Employee.objects.all().count()
+    present = entry.count()
+    absent = count - present
 
     context = {
         'leave': leave,
         'entry': entry,
         'exit': exit,
+        'count': count,
+        'present':present,
+        'absent':absent,
     }
     return render(request, 'main/home.html', context)
 
@@ -65,9 +72,9 @@ def employee(request):
     employee = Employee.objects.all()
     return render(request, 'main/employees.html', {'employee': employee})
 
-
-def employ(request, pk):
-    employee = Employee.objects.all().filter(pk=pk)
+@login_required
+def employ(request, name):
+    employee = Employee.objects.all().filter(name=name)
     return render(request, 'main/employ.html', {'employee': employee})
 
 
@@ -107,20 +114,14 @@ def exit(request):
     return render(request, 'main/exit.html')
 
 
-def entry_attendance(request, user):
-    user = Entry.objects.filter(user=request.user)
+def attendance(request, user):
+    entry = Entry.objects.filter(user=request.user)
+    exit = Exit.objects.filter(user=request.user)
     context = {
-        'user': user,
+        'exit': exit,
+        'entry':entry,
     }
     return render(request, "main/details.html", context)
-
-
-def exit_attendance(request, user):
-    user = Exit.objects.filter(user=request.user)
-    context = {
-        'user': user,
-    }
-    return render(request, "main/detail.html", context)
 
 
 def grant(request, pk):
@@ -146,6 +147,10 @@ def reject(request, pk):
 
     return render(request, 'main/reject.html', {'leave': leave})
 
+
+@login_required
+def profile(request):
+    return HttpResponseRedirect(reverse('detail', args=[request.user.username]))
 
 
 

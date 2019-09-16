@@ -12,14 +12,36 @@
     </thead>
 
     <tbody class="table-ko-body table-primary" id="myTable">
-        {% for user in user.all %}
+        {% for entry in entry.all %}
         <tr>
-        <td>{{ user.user.id }}</td>
-        <td>{{ user.user }}</td>
-        <td>{{ user.start_time }}</td>
+        <td>{{ entry.user.id }}</td>
+        <td>{{ entry.user }}</td>
+        <td>{{ entry.start_time }}</td>
         </tr>
          {% endfor %}
     </tbody>
 </table>
+
+<h1 align="center">Exit Table</h1>
+<table align="center" class="table table-sm" id="user--tables" style="max-width: 800px;max-height: 400px;">
+    <thead class="thead-dark">
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Exit-Time</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-ko-body table-primary" id="mymTables">
+        {% for exit in exit.all %}
+        <tr>
+        <td>{{ exit.user.id }}</td>
+        <td>{{ exit.user }}</td>
+        <td>{{ exit.end_time }}</td>
+        </tr>
+         {% endfor %}
+    </tbody>
+</table>
+
 
 {% endblock %}

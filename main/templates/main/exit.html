@@ -4,10 +4,10 @@
 <div class="card" align="center">
 <form method="post">
 {% csrf_token %}
-<br>
 <h1>Exit Form</h1>
-<h3 class="text-uppercase">name:{{user}}</h3><hr>
-    <button class="btn btn-danger" type="submit">Exit</button>
+    <hr>
+<h3 class="text-uppercase">Are you sure you are exiting office now?</h3>
+    <button class="btn btn-danger" type="submit">yes,Exit</button>
 </form>
 </div>
 {% endblock %}

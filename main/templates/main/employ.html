@@ -123,10 +123,7 @@
                                     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/entry/" aria-selected="false">Entry</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="/exit/" aria-selected="false">Exit</a>
+                                    <a class="nav-link" id="attendance-tab" data-toggle="tab" href="#attendance" role="tab" aria-controls="attendance" aria-selected="true">Attendance</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="/leave/" aria-selected="false">Leave</a>
@@ -143,9 +140,7 @@
                             <a>Web Developer</a><br/>
                             <a>Django</a><br/>
                             <a>Python</a><br/>
-                            <p>Attendance</p>
-                            <a type="button" class="btn btn-success" href="/details/{{user}}/">Entry</a>
-                            <a type="button" class="btn btn-danger" href="/detail/{{user}}/">Exit</a>
+                            <a type="button" class="btn btn-primary" href="/details/{{user}}/">Attendance-Table</a>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -192,6 +187,28 @@
                                             </div>
                                         </div>
                             </div>
+
+                            <div class="tab-pane fade show" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label>Start-time</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a type="button" class="btn btn-success" href="/entry/">Entry</a>
+                                            </div>
+                                        </div>
+                                <div class="row">
+                                            <div class="col-md-6">
+                                                <label>end-time</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a type="button" class="btn btn-danger" href="/exit/">Exit</a>
+                                            </div>
+                                        </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
                             </div>
                         </div>
                     </div>

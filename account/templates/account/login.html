@@ -11,18 +11,10 @@
 
 <h1>Login!</h1>
 
-    <form method="POST" action="{% url 'login' %}">
+    <form method="POST">
 
     {% csrf_token %}
-    Username:
-    <br>
-    <input type="text" name="username">
-    <br>
-    Password:
-    <br>
-    <input type="password" name="password">
-    <br>
-    <br>
+    {{ form.as_p}}
     <input class="btn btn-primary" type="submit" value="Login">
     </form>
 

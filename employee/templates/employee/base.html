@@ -14,6 +14,33 @@
       font-family: "Lato", sans-serif;
       background: -webkit-linear-gradient(left, #007991, #78ffd6);
     }
+    .sidenav {
+    height: 100%;
+  width: 170px;
+  position: fixed;
+  z-index: 1;
+  top: 50px;
+  background: #007991;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+
+.sidenav a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.sidenav a:hover {
+  color: black;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
     </style>
 </head>
 <body>
@@ -25,17 +52,20 @@
     <div class="collapse navbar-collapse">
          {% if user.is_authenticated %}
         <ul class="navbar-nav ml-auto">
+            {% if user.is_staff %}
             <li class="nav-item">
-        <a class="nav-link">{{user.username}}</a>
+        <a class="nav-link " href="/home" >{{user.username}}</a>
       </li>
-     <li class="nav-item">
-        <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}" onclick="">Logout</a>
+            {% else %}
+            <li class="nav-item">
+        <a class="nav-link" href="">{{user.username}}</a>
+      </li>
+            {% endif %}
+            <li class="nav-item">
+        <a class="nav-link" href="/logout">logout</a>
       </li>
         </ul>
-            <form id="logout" method="POST" action="{% url 'logout' %}">
-            {% csrf_token %}
-            <input type="hidden">
-            </form>
+
     {% else %}
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
@@ -47,6 +77,13 @@
 
 </nav>
     </div>
+
+<div class="sidenav {{home_page}}">
+  <a href="/home">Home</a>
+  <a href="/employee">Employees</a>
+  <a href="/create">Create</a>
+  <a href="#contact">Detail</a>
+</div>
 
 
 <div class="container">
