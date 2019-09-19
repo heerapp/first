@@ -1,23 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-{% for message in messages %}
-
-<style>
-.messages{
-background-color:green;
-}
-</style>
-
-<div class="messages">
-  <div class="alert {{ message.tags }} alert-dismissible h3" role="alert">
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    {{ message }}
-  </div>
-    </div>
-{% endfor %}
 
 <br>
 <div class="row">
@@ -62,48 +45,42 @@ background-color:green;
 </table>
 <hr>
 <h1 align="center">Entry Table</h1>
-<table align="center" class="table table-sm" id="user-table" style="max-width: 600px;max-height: 400px;">
-    <thead style="background-color:green;">
+<table align="center" class="table table-sm" id="user--tables" style="max-width: 600px;max-height: 400px;">
+    <thead class="thead-dark">
         <tr>
-            <th>#</th>
             <th>Name</th>
-            <th>Entry-Time</th>
+            <th>start-time</th>
         </tr>
     </thead>
 
-    <tbody class="table-ko-body table-primary" id="myTable">
-        {% for entry in entry %}
+    <tbody class="table-ko-body table-primary" id="my-Tables">
+        {% for entry in entry.all %}
         <tr>
-        <td>{{ entry.user.id }}</td>
         <td>{{ entry.user }}</td>
         <td>{{ entry.start_time }}</td>
-        </tr>
-         {% endfor %}
+        {% endfor %}
+    </tr>
     </tbody>
 </table>
 <hr>
 <h1 align="center">Exit Table</h1>
-<table align="center" class="table table-sm" id="user-tabless" style="max-width: 600px;max-height: 400px;">
-    <thead style="background-color:red;">
+<table align="center" class="table table-sm" id="user--table" style="max-width: 600px;max-height: 400px;">
+    <thead class="thead-dark">
         <tr>
-            <th>#</th>
             <th>Name</th>
-            <th>Exit-Time</th>
+            <th>end-time</th>
         </tr>
     </thead>
 
-    <tbody class="table-ko-body table-primary" id="myTabless">
-        {% for exit in exit %}
+    <tbody class="table-ko-body table-primary" id="my--Tables">
+        {% for exit in exit.all %}
         <tr>
-        <td>{{ exit.user.id }}</td>
         <td>{{ exit.user }}</td>
         <td>{{ exit.end_time }}</td>
-        </tr>
-         {% endfor %}
+        {% endfor %}
+    </tr>
     </tbody>
 </table>
-
-
 {% endblock %}
 
 

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<h1 align="center">Entry Table</h1>
+<table align="center" class="table table-sm" id="user-tables" style="max-width: 800px;max-height: 400px;">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>start-time</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-ko-body table-primary" id="myTables">
+        {% for entry in entry.all %}
+        <tr>
+        <td>{{ entry.user }}</td>
+        <td>{{ entry.start_time }}</td>
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
+<hr>
+<h1 align="center">Exit Table</h1>
+<table align="center" class="table table-sm" id="user--table" style="max-width: 600px;max-height: 400px;">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>end-time</th>
+        </tr>
+    </thead>
+
+    <tbody class="table-ko-body table-primary" id="my--Tables">
+        {% for exit in exit.all %}
+        <tr>
+        <td>{{ exit.user }}</td>
+        <td>{{ exit.end_time }}</td>
+        {% endfor %}
+    </tr>
+    </tbody>
+</table>
+
+{% endblock %}

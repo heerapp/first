@@ -7,7 +7,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <style>
     body {
       margin: 0;
@@ -58,7 +57,7 @@
       </li>
             {% else %}
             <li class="nav-item">
-        <a class="nav-link" href="">{{user.username}}</a>
+        <a class="nav-link" href="/employee/{{user}}">{{user.username}}</a>
       </li>
             {% endif %}
             <li class="nav-item">
@@ -78,12 +77,22 @@
 </nav>
     </div>
 
+{% if user.is_authenticated %}
+{% if user.is_staff %}
 <div class="sidenav {{home_page}}">
   <a href="/home">Home</a>
   <a href="/employee">Employees</a>
-  <a href="/create">Create</a>
-  <a href="#contact">Detail</a>
+  <a href="/attendance">Attendance</a>
+  <a href="/leaves">Leave</a>
 </div>
+{% else %}
+<div class="sidenav {{home_page}}">
+  <a href="/employee/{{user}}">Home</a>
+  <a href="/details/{{user}}/">Attendance</a>
+  <a href="/employee/{{user}}/leaves/">Leave</a>
+</div>
+{% endif %}
+{% endif %}
 
 
 <div class="container">

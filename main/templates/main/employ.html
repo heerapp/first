@@ -102,6 +102,11 @@
     color: #0062cc;
 }
 </style>
+<script>
+    $(function () {
+  $('[data-toggle="popover"]').popover()
+})
+</script>
 
 <div class="container emp-profile">
                 <div class="row">
@@ -131,6 +136,9 @@
                             </ul>
                         </div>
                     </div>
+                    <div class="col-md-2">
+                        <button type="button" class="btn btn-secondary" data-toggle="popover" data-placement="bottom" title="total={{total}}" data-content="available={{available}}">Yearly Leave</button>
+                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -140,7 +148,6 @@
                             <a>Web Developer</a><br/>
                             <a>Django</a><br/>
                             <a>Python</a><br/>
-                            <a type="button" class="btn btn-primary" href="/details/{{user}}/">Attendance-Table</a>
                         </div>
                     </div>
                     <div class="col-md-8">

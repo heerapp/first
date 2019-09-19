@@ -1,31 +1,32 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<br>
+
+
+<h1 align="center">Leaves Table</h1>
 <table align="center" class="table table-sm" id="user-tables" style="max-width: 800px;max-height: 400px;">
     <thead class="thead-dark">
         <tr>
             <th>#</th>
             <th>Name</th>
-            <th>address</th>
-            <th>contact</th>
-            <th>staff type</th>
+            <th>Date</th>
+            <th>Reason</th>
+            <th>Status</th>
         </tr>
     </thead>
 
     <tbody class="table-ko-body table-primary" id="myTables">
-        {% for employee in employee %}
+        {% for leave in leave %}
         <tr id="leave">
-        <td>{{ employee.id }}</td>
-        <td>{{ employee.name }}</td>
-        <td>{{ employee.address }}</td>
-        <td>{{ employee.contact }}</td>
-        <td>{{employee.type}}</td>
+        <td>{{ leave.user.id }}</td>
+        <td>{{ leave.user }}</td>
+        <td>{{ leave.date }}</td>
+        <td>{{ leave.reason }}</td>
+        <td style="color:red;">{{leave.status}}</td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
 
-<a type="button" class="btn btn-primary" href="/create" style="float:right; margin-right: 160px;">Create</a>
 
 {% endblock %}

@@ -12,7 +12,7 @@ def index(request):
 
 @permission_required('is_superuser', raise_exception=True)
 def home(request):
-    leave = Leave.objects.all()
+    leave = Leave.objects.all().filter(status= 'pending...')
     entry = Entry.objects.all().filter(start_time__date__day=datetime.now().day)
     exit = Exit.objects.all().filter(end_time__date__day=datetime.now().day)
     count = Employee.objects.all().count()
@@ -24,8 +24,8 @@ def home(request):
         'entry': entry,
         'exit': exit,
         'count': count,
-        'present':present,
-        'absent':absent,
+        'present': present,
+        'absent': absent,
     }
     return render(request, 'main/home.html', context)
 
@@ -45,37 +45,26 @@ def create(request):
 
 
 @permission_required('is_superuser', raise_exception=True)
-def delete(request, pk):
-    employee = get_object_or_404(Employee, pk=pk)
-
-    if request.method == 'POST':
-        employee.delete()
-        return redirect('/')
-
-    context = {'employee': employee}
-    return render(request, 'main/delete.html', context)
-
-
-@permission_required('is_superuser', raise_exception=True)
-def edit(request, pk):
-    employee = get_object_or_404(Employee, pk=pk)
-    form = EmployeeForm(request.POST or None, instance=employee)
-    if form.is_valid():
-        form.save()
-        return redirect('/')
-
-    return render(request, 'main/edit.html', {'employee': employee})
-
-
-@permission_required('is_superuser', raise_exception=True)
 def employee(request):
-    employee = Employee.objects.all()
+    employee = Employee.objects.all().order_by('-id')
     return render(request, 'main/employees.html', {'employee': employee})
 
-@login_required
+
+@login_required(login_url='login')
 def employ(request, name):
-    employee = Employee.objects.all().filter(name=name)
-    return render(request, 'main/employ.html', {'employee': employee})
+    user = request.user
+    employee = Employee.objects.all().filter(name=name).filter(name=user)
+    total = 12
+    count = Leave.objects.all().filter(user=request.user).filter(status='Granted').count()
+    available = total - count
+    content = {
+        'employee': employee,
+        'total': total,
+        'count': count,
+        'available': available,
+        }
+
+    return render(request, 'main/employ.html', content)
 
 
 def leave(request):
@@ -151,6 +140,29 @@ def reject(request, pk):
 @login_required
 def profile(request):
     return HttpResponseRedirect(reverse('detail', args=[request.user.username]))
+
+
+def all_attendence(request):
+    entry = Entry.objects.all()
+    exit = Exit.objects.all()
+    context = {
+        'entry': entry,
+        'exit': exit,
+    }
+    return render(request, 'main/attendance.html', context)
+
+
+def all_leave(request):
+    leave = Leave.objects.all()
+    return render(request, 'main/leaves.html', {'leave': leave})
+
+
+def leaves(request, user):
+    leave = Leave.objects.filter(user=request.user)
+    context = {
+        'leave':leave,
+    }
+    return render(request, "main/leaves.html", context)
 
 
 
