@@ -32,16 +32,13 @@ def home(request):
 
 @permission_required('is_superuser', login_url='login')
 def create(request):
-    form = EmployeeForm(request.POST or None, request.FILES)
+    form = UserRegisterForm(request.POST or None)
 
     if form.is_valid():
-        if User.DoesNotExist:
-            user = User.objects.create_user(request.POST['name'], password=request.POST['password'])
-            form.save()
-            auth.login(request, user)
-            return redirect('/')
+        form.save()
+        return redirect('/')
 
-    return render(request, 'main/create.html')
+    return render(request, 'main/create.html', {'form':form})
 
 
 @permission_required('is_superuser', raise_exception=True)
@@ -52,19 +49,22 @@ def employee(request):
 
 @login_required(login_url='login')
 def employ(request, name):
-    user = request.user
-    employee = Employee.objects.all().filter(name=name).filter(name=user)
-    total = 12
-    count = Leave.objects.all().filter(user=request.user).filter(status='Granted').count()
-    available = total - count
-    content = {
-        'employee': employee,
-        'total': total,
-        'count': count,
-        'available': available,
-        }
+    if request.method == 'POST':
+        u_form = UserUpdateForm(request.POST, instance=request.user)
+        p_form = EmployeeUpdateForm(request.POST, request.FILES, instance=request.user.employee)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            return redirect('/')
+    else:
+        u_form = UserUpdateForm(instance=request.user)
+        p_form = EmployeeUpdateForm(instance=request.user.employee)
 
-    return render(request, 'main/employ.html', content)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'main/employ.html', context)
 
 
 def leave(request):
@@ -170,6 +170,23 @@ def leaves(request, user):
         'leave':leave,
     }
     return render(request, "main/leaves.html", context)
+
+
+def profiles(request,name):
+    user = request.user
+    employee = Employee.objects.all().filter(user=user)
+    total = 12
+    count = Leave.objects.all().filter(user=request.user).filter(status='Granted').count()
+    available = total - count
+    content = {
+        'employee': employee,
+        'total': total,
+        'count': count,
+        'available': available,
+    }
+
+    return render(request, 'main/employs.html', content)
+
 
 
 

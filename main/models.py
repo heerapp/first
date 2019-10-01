@@ -12,16 +12,19 @@ STAFF_CHOICES = [
 
 
 class Employee(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     type = models.CharField(max_length=100, choices=STAFF_CHOICES)
-    email = models.CharField(max_length=100, default="abc@gmail.com")
     address = models.CharField(max_length=200)
     contact = models.CharField(max_length=200)
-    password = models.CharField(max_length=32)
     image = models.ImageField(upload_to="media/")
 
-    def __str__(self):
-        return self.name
+
+def create_employee(sender, **kwargs):
+    if kwargs['created']:
+        Employee.objects.create(user=kwargs['instance'])
+
+
+post_save.connect(create_employee, sender=User)
 
 
 class Entry(models.Model):

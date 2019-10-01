@@ -7,31 +7,7 @@
     {% csrf_token %}
     <div class="form-group">
         <div class="jumbotron">
-        <label>Name</label>
-        <input name="name" type="text" class="form-control" id="name" placeholder="Name">
-        <br>
-        <label>Staff Type</label>
-        <select name="type">
-        <option value="Web Developer" selected>developer</option>
-        <option value="Receptionist">receptionist</option>
-        <option value="Manager">manager</option>
-        <option value="Designer">designer</option>
-        </select>
-        <br><br>
-            <label>Email</label>
-        <input name="email" type="email" class="form-control" id="email" placeholder="eg:abc@gmail.com">
-        <br>
-         <label>Contact</label>
-        <input name="contact" type="text" class="form-control" id="contact" placeholder="Contact">
-        <br>
-        <label>Address</label>
-        <input name="address" type="text" class="form-control" id="address" placeholder="Address">
-            <br>
-        <label>Password</label>
-        <input name="password" type="password" class="form-control" id="password" placeholder="Password">
-            <br>
-            <label class="required">Image:</label>
-            <input type="file" name="image" id="image">
+            {{form.as_p}}
         </div>
 
     <div class="footer">

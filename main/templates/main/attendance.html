@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
+<input id="myInput" type="text" placeholder="Search..">
 <br>
 <h1 align="center">Entry Table</h1>
 <table align="center" class="table table-sm" id="user-tables" style="max-width: 800px;max-height: 400px;">
@@ -36,7 +47,7 @@
         <tr>
         <td>{{ exit.user }}</td>
         <td>{{ exit.end_time }}</td>
-            <td>{{ exit.status }}</td>
+        <td>{{ exit.status }}</td>
         {% endfor %}
     </tr>
     </tbody>
