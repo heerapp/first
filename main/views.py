@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404,HttpResponseRedirect,reverse
-from django.contrib import auth, messages
+from django.contrib import auth
 from django.contrib.auth.decorators import permission_required,login_required
 from .forms import *
 
@@ -73,9 +73,11 @@ def leave(request):
     if form.is_valid():
         leave = form.save(commit=False)
         leave.user = request.user
+        if leave.date < datetime.now().date():
+            leave.status = "Granted"
         leave.save()
-        messages.success(request, 'your leave request has been sent.')
         return redirect('/')
+
     return render(request, 'main/leave.html')
 
 
@@ -86,29 +88,36 @@ def entry(request):
         entry = form.save(commit=False)
         entry.user = request.user
         entry.save()
-        messages.success(request, 'your attendance has been saved.')
         return redirect('/')
     return render(request, 'main/entry.html')
 
 
 def exit(request):
     form = ExitForm(request.POST or None)
-
     if form.is_valid():
         exit = form.save(commit=False)
         exit.user = request.user
+        now = datetime.now()
+        time = now.strftime("%H")
+        if time < '4':
+            exit.status = "Half Day"
+        else:
+            exit.status = "Full Day"
         exit.save()
-        messages.success(request, 'your attendance has been saved.')
         return redirect('/')
-    return render(request, 'main/exit.html')
+    else:
+        return render(request, 'main/exit.html')
 
 
 def attendance(request, user):
     entry = Entry.objects.filter(user=request.user)
     exit = Exit.objects.filter(user=request.user)
+    now = datetime.now()
+    month = now.strftime("%B")
     context = {
         'exit': exit,
         'entry':entry,
+        'month': month,
     }
     return render(request, "main/details.html", context)
 
@@ -119,7 +128,6 @@ def grant(request, pk):
     if request.method == 'POST':
         leave.status = "Granted"
         leave.save()
-        messages.success(request, 'leave granted')
         return redirect('/home')
 
     return render(request, 'main/grant.html', {'leave': leave})
@@ -131,7 +139,6 @@ def reject(request, pk):
     if request.method == 'POST':
         leave.status = "rejected"
         leave.save()
-        messages.success(request, 'leave rejected')
         return redirect('/home')
 
     return render(request, 'main/reject.html', {'leave': leave})

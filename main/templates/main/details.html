@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<h1 align="center" style="color:red;">{{month}}</h1>
+<hr>
 <h1 align="center">Entry Table</h1>
 <table align="center" class="table table-sm" id="user-table" style="max-width: 800px;max-height: 400px;">
     <thead class="thead-dark">
@@ -29,6 +31,7 @@
             <th>#</th>
             <th>Name</th>
             <th>Exit-Time</th>
+            <th>Status</th>
         </tr>
     </thead>
 
@@ -38,6 +41,7 @@
         <td>{{ exit.user.id }}</td>
         <td>{{ exit.user }}</td>
         <td>{{ exit.end_time }}</td>
+            <td>{{exit.status}}</td>
         </tr>
          {% endfor %}
     </tbody>

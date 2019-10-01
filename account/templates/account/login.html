@@ -1,23 +1,510 @@
-
 {% extends 'base.html' %}
 
 {% block content %}
+<style>
 
+.content {
+	width: 35%;
+	margin-top: 7%;
+	margin-left: auto;
+	margin-right: auto;
+	text-align:center;
+	background: #007991;
+	padding: 50px;
+}
+.content h1 {
+	font-family: 'Orbitron', sans-serif;
+	font-size:34px;
+}
+.content1 {
+	background-color:#e74c3c;
+	height:120px;
+    position:relative;
+	margin-top:15%;
+}
+.content2 {
+	background-color:#fe9c39;
+	height:120px;
+    position:relative;
+}
+input[type="text"] {
+	padding:10px;
+	width:66%;
+	background-color:#e74c3c;
+	border:2px solid white;
+	color:white;
+	text-align:center;
+	border-radius:26px;
+	outline:none;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+	margin-top:5.5%;
+}
+.content1:after {
+	content: '';
+	position:absolute;
+	bottom:84%;
+	top:100%;
+	z-index:99;
+	left:47%;
+	border-left: 25px solid #E74C3C;
+    border-right: 25px solid #E74C3C;
+    border-bottom: 25px solid #e74c3c;
+    transform: rotate(-180deg);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+input[type="password"] {
+	padding:10px;
+	width:66%;
+	background-color:#fe9c39;
+	border:2px solid white;
+	color:white;
+	text-align:center;
+	border-radius:26px;
+	outline:none;
+	font-size:20px;
+    font-family: 'Open Sans', sans-serif;
+	margin-top:5.5%;
+}
+.content2:after {
+	content: '';
+	position:absolute;
+	bottom:84%;
+	top:100%;
+	left: 47%;
+    border-left: 25px solid #FE9C39;
+    border-right: 25px solid #FE9C39;
+    border-bottom: 25px solid #fe9c39;
+    transform: rotate(-180deg);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+input[type="submit"] {
+	text-align:center;
+	padding:10px;
+	background-color:#34495e;
+	width:150px;
+	border:none;
+	cursor:pointer;
+	color:white;
+	font-weight:bold;
+	font-family: 'Open Sans', sans-serif;
+	font-size:20px;
+	margin-top:5%;
+    margin-left:15%;
+	outline:none;
+}
+input[type="submit"]:hover {
+	background-color:black;
+	color:white;
+	transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -o-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -ms-transition: 0.5s all;
+}
+a,a:active {
+	color:black;
+	text-decoration:none;
+	transition: all 0.5s ease-in-out;
+}
+a:hover {
+	color:red;
+	transition: all 0.5s ease-in-out;
+}
+
+
+/*-- responsive-mediaquries --*/
+@media(max-width:1680px){
+	.content1:after 	{
+		top:100%;
+		left: 46%;
+	}
+	.content2:after {
+		top:100%;
+		left: 46%;
+	}
+	input[type="password"] {
+		margin-top:7%;
+	}
+	input[type="text"] {
+		margin-top: 6%;
+	}
+}
+@media(max-width:1600px){
+	.content1:after {
+		top:100%;
+	}
+	.content2:after {
+		top:100%;
+	}
+}
+@media(max-width:1440px){
+	.content1:after {
+		top:97%;
+	}
+	.content2:after {
+		top:97%;
+	}
+	input[type="password"] {
+		margin-top:8%;
+	}
+	input[type="text"] {
+		margin-top: 8%;
+	}
+}
+
+@media(max-width:1366px) {
+	.content1:after {
+		top: 100%;
+	}
+	.content2:after {
+	top: 100%;
+	}
+	.content1:after {
+		left: 45%;
+	}
+	.content2:after {
+		left: 45%;
+	}
+}
+@media(max-width:1280px){
+	.content h1 	{
+	font-size:32px;
+	}
+	input[type="password"] {
+		margin-top:10%;
+	}
+	input[type="text"] {
+		margin-top: 9%;
+	}
+}
+@media(max-width:1200px){
+	.content {
+		width: 40%;
+	}
+}
+@media(max-width:1080px){
+	.content h1 	{
+		font-size: 30px;
+	}
+	.content1:after  {
+		top: 100%;
+	}
+	.content2:after {
+		top: 100%;
+	}
+	.content {
+		width: 45%;
+	}
+	input[type="password"] {
+		margin-top:9%;
+	}
+	input[type="text"] {
+		margin-top: 8%;
+	}
+}
+@media(max-width:1024px){
+	.content1 {
+		margin-top:18%;
+	}
+	input[type="text"] {
+		width:72%;
+		margin-top:9%;
+	}
+	input[type="password"] {
+		width:72%;
+		margin-top:9%;
+	}
+	.content1:after {
+		top: 100%;
+	}
+	.content2:after {
+		top: 100%;
+	}
+}
+@media(max-width:991px){
+	.content h1 	{
+		font-size: 28px;
+	}
+	.content1:after {
+    top: 98%;
+	}
+	.content2:after {
+		top: 98%;
+	}
+	input[type="submit"] {
+		margin-top: 12%;
+	}
+	.content1:after {
+		left: 44%;
+	}
+	.content2:after {
+		left: 44%;
+	}
+}
+
+@media(max-width:800px){
+	.content h1 {
+	font-size: 31px;
+	}
+	.content      {
+		width:55%;
+	}
+	input[type="text"] {
+		width:72%;
+		margin-top:7.5%;
+	}
+	input[type="password"] {
+		width:72%;
+		margin-top:8.5%;
+	}
+}
+
+@media(max-width:768px){
+	.content {
+		width:57%;
+		margin-top:15%;
+	}
+	.content1 {
+		margin-top:15%;
+	}
+	input[type="text"] {
+		width:72%;
+		margin-top:7.5%;
+	}
+	input[type="password"] {
+		width:72%;
+		margin-top:8.5%;
+	}
+	.footer {
+		margin-top:15%;
+	}
+}
+
+@media(max-width:736px){
+	.content {
+		width:75%;
+		margin-top:0;
+	}
+	.content1 {
+		margin-top:0;
+	}
+	.footer {
+		margin-top:0;
+	}
+}
+
+@media(max-width:667px){
+	.content {
+		width:75%;
+		margin-top:0%;
+	}
+	.content1 {
+		margin-top:0%;
+	}
+	.footer {
+		margin-top:0%;
+	}
+}
+
+@media(max-width:640px){
+	.content  {
+		width:67%;
+	}
+}
+
+@media(max-width:600px){
+	.content h1   {
+		font-size: 28px;
+	}
+	input[type="text"] {
+		width:72%;
+		margin-top:9%;
+	}
+	input[type="password"] {
+		width:72%;
+		margin-top:9%;
+	}
+	.footer p     {
+		font-size:14px;
+	}
+	.footer {
+		margin-top:6%;
+	}
+	.content1 {
+		margin-top:8%;
+	}
+	.content {
+		margin-top: 7%;
+	}
+}
+
+@media(max-width:568px){
+	.content {
+		margin-top:0%;
+		width:75%;
+	}
+	.content1 {
+		margin-top:1%;
+	}
+	.content h1 {
+		font-size:26px;
+	}
+	.footer {
+		margin-top:1%;
+	}
+	.footer p {
+		font-size:14px;
+	}
+}
+
+@media(max-width:480px){
+	.content {
+		width:75%;
+	}
+	.content h1 {
+		font-size: 26px;
+	}
+	.content2:after {
+		top: 100%;
+	}
+}
+
+@media(max-width:414px){
+	.content {
+		margin-top:22%;
+		width:85%;
+	}
+	.content1 {
+		margin-top:17%;
+	}
+	.content h1 {
+		font-size: 25px;
+	}
+	input[type="text"] {
+		width:72%;
+		margin-top:11%;
+	}
+	input[type="password"] {
+		width:72%;
+		margin-top:12%;
+	}
+	.footer {
+		margin-top:19%;
+	}
+	.footer p {
+		font-size:15px;
+	}
+	.content1:after {
+    left: 42%;
+	}
+	.content2:after {
+		left: 42%;
+	}
+}
+
+@media(max-width:384px){
+	.content {
+		margin-top:15%;
+	}
+	.content h1 {
+		font-size:23px;
+	}
+	input[type="text"] {
+		width:75%;
+		margin-top:10%;
+	}
+	input[type="password"] {
+		width:75%;
+		margin-top:10%;
+	}
+	.footer p {
+		font-size:14px;
+	}
+}
+
+@media(max-width:375px){
+	.content   {
+		width: 85%;
+		margin-top:20%;
+	}
+	.content  h1 {
+		font-size:22px;
+	}
+	.content1 {
+		margin-top:18%;
+	}
+	input[type="text"] {
+		width:72%;
+		margin-top:12%;
+	}
+	input[type="password"] {
+		width:72%;
+		margin-top:13%;
+	}
+	.footer {
+		margin-top:17%;
+	}
+	.footer p {
+		font-size:14px;
+	}
+}
+
+@media(max-width:320px){
+	.content {
+		width: 87%;
+		margin-top:13%;
+	}
+	.content1 {
+		margin-top:14%;
+		height:100px;
+	}
+	.content2 {
+		height:100px;
+	}
+	.content h1 {
+		font-size: 19px;
+	}
+	.footer {
+		margin-top:16%;
+	}
+	.footer p {
+		font-size:14px;
+	}
+	input[type="text"] {
+		font-size:15px;
+		margin-top:11%;
+	}
+	input[type="password"] {
+		font-size:15px;
+		margin-top:13%;
+	}
+	input[type="submit"] {
+		font-size:16px;
+	}
+		input[type="submit"] {
+		margin-top: 16%;
+	}
+}
+</style>
 {% if error %}
     {{ error }}
     <br>
     <br>
 {% endif %}
 
-<h1>Login!</h1>
+<link href='//fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
 
-    <form method="POST">
-
-    {% csrf_token %}
-    {{ form.as_p}}
-    <input class="btn btn-primary" type="submit" value="Login">
-    </form>
-
-
+    <div class="content">
+		<h1 style="font-weight:bolder;">LOGIN!</h1>
+		<form method="post">
+            {% csrf_token %}
+	        {{form.as_p}}
+			<input type="submit" value="LOGIN">
+		</form>
+	</div>
 {% endblock %}
 

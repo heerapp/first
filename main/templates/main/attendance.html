@@ -7,7 +7,7 @@
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
-            <th>start-time</th>
+            <th>Start-time</th>
         </tr>
     </thead>
 
@@ -26,7 +26,8 @@
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
-            <th>end-time</th>
+            <th>End-time</th>
+            <th>Status</th>
         </tr>
     </thead>
 
@@ -35,6 +36,7 @@
         <tr>
         <td>{{ exit.user }}</td>
         <td>{{ exit.end_time }}</td>
+            <td>{{ exit.status }}</td>
         {% endfor %}
     </tr>
     </tbody>

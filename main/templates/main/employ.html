@@ -121,7 +121,7 @@
                                         {{employee.name}}
                                     </h1>
                                     <h6>
-                                        Web Developer and Designer
+                                        {{employee.type}}
                                     </h6>
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
                                 <li class="nav-item">
@@ -158,7 +158,7 @@
                                                 <label>User id</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{employee.name}}{{employee.id}}</p>
+                                                <p>{{employee.id}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -166,7 +166,7 @@
                                                 <label>Name</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>{{employee.name}} Prajapati</p>
+                                                <p>{{employee.name}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -174,7 +174,7 @@
                                                 <label>Email</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>employee@gmail.com</p>
+                                                <p>{{employee.email}}</p>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -190,11 +190,10 @@
                                                 <label>Profession</label>
                                             </div>
                                             <div class="col-md-6">
-                                                <p>Web Developer and Designer</p>
+                                                <p>{{employee.type}}</p>
                                             </div>
                                         </div>
-                            </div>
-
+                                </div>
                             <div class="tab-pane fade show" id="attendance" role="tabpanel" aria-labelledby="attendance-tab">
                                 <div class="row">
                                             <div class="col-md-6">
@@ -220,5 +219,13 @@
                         </div>
                     </div>
                 </div>
+<!--<footer align="right" style="margin-right:300px;">-->
+<!--    <nav>-->
+<!--        <ul>-->
+<!--    <li style="display:inline-block;"><a style="color:#003569;" href="/user/">update</a></li> |-->
+<!--    <li style="display:inline-block;"><a style="color:#003569;" href="#">security</a></li>-->
+<!--        </ul>-->
+<!--    </nav>-->
+<!--</footer>-->
 {% endfor %}
 {% endblock %}
